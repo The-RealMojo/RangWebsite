@@ -136,7 +136,6 @@ section.visible {
 .who-are-we-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    border: var(--border-thin);
     position: relative;
 }
 
@@ -271,26 +270,27 @@ section.visible {
 .success-left {
   font-size: clamp(2.25rem, 6vw, 4.25rem);
   font-weight: 400;
-  align-self: flex-start;
-  margin-bottom: clamp(0.1rem, 0.8vw, 0.4rem);
+  align-self: center;
+  margin-bottom: clamp(0.01rem, 0.8vw, 0.04rem);
 }
 
 /* success */
 .success-main {
-  font-size: clamp(6.5rem, 12vw, 50rem);
+  font-size: clamp(8.5rem, 12vw, 70rem);
   font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1;
   align-self: center;
-  margin-bottom: clamp(0.6rem, 2.5vw, 1.5rem);
-  margin-top: 3px;
+  margin-bottom: clamp(0.6rem, 2.5vw, 0.5rem);
+  margin-top: -50px;
 }
 
 /* looks like */
 .success-right {
   font-size: clamp(2.25rem, 6vw, 4.25rem);
   font-weight: 400;
-  align-self: flex-end;
+  align-self: center;
+  margin-top: -20px;
 }
 
 /* ignore for now 
@@ -464,7 +464,7 @@ section.visible {
 }
 
 .case-study-metric {
-    font-size: clamp(52px, 7.5vw, 88px);
+    font-size: clamp(52px, 7.5vw, 67px);
     font-weight: var(--font-weight-bold);
     line-height: 1.05;
     margin-bottom: var(--space-6);
