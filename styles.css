@@ -59,6 +59,59 @@
     --border-thin: 1px solid var(--color-border);
 }
 
+/* Override design tokens with a valid :root using rem-based sizing
+   This keeps the same aesthetic while improving scalability */
+:root {
+    /* Color Palette */
+    --color-bg: #FAFAF5;
+    --color-text: #1A1A1A;
+    --color-text-light: rgba(26, 26, 26, 0.7);
+    --color-border: #1A1A1A;
+    --color-accent: #000000;
+
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Font Sizes (rem-based for better scaling) */
+    --text-xs: 0.8125rem;   /* 13px */
+    --text-sm: 0.9375rem;   /* 15px */
+    --text-base: 1.0625rem; /* 17px */
+    --text-lg: 1.1875rem;   /* 19px */
+    --text-xl: 1.375rem;    /* 22px */
+    --text-2xl: 1.75rem;    /* 28px */
+    --text-3xl: 2.25rem;    /* 36px */
+    --text-4xl: 3rem;       /* 48px */
+    --text-5xl: 4rem;       /* 64px */
+    --text-6xl: 5rem;       /* 80px */
+    --text-hero: clamp(4.5rem, 11vw, 8rem); /* 72px–128px */
+
+    /* Spacing Scale (rem-based for consistent rhythm) */
+    --space-1: 0.5rem;   /* 8px */
+    --space-2: 0.75rem;  /* 12px */
+    --space-3: 1rem;     /* 16px */
+    --space-4: 1.5rem;   /* 24px */
+    --space-5: 2rem;     /* 32px */
+    --space-6: 2.5rem;   /* 40px */
+    --space-7: 3rem;     /* 48px */
+    --space-8: 4rem;     /* 64px */
+    --space-9: 5rem;     /* 80px */
+    --space-10: 6.25rem; /* 100px */
+    --space-11: 7.5rem;  /* 120px */
+    --space-12: 10rem;   /* 160px */
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Borders */
+    --border-thin: 1px solid var(--color-border);
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -76,13 +129,15 @@ body {
 }
 
 .container {
-    max-width: 1280px;
+    max-width: 80rem; /* 1280px */
     margin: 0 auto;
-    padding: 0 80px;
+    /* Fluid horizontal padding using rem/% instead of fixed px */
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
 }
 
 section {
-    padding: var(--space-11) 0;
+    /* Base (mobile-first) vertical padding */
+    padding-block: var(--space-9);
     opacity: 0;
     transform: translateY(20px);
     transition: opacity var(--transition-slow), transform var(--transition-slow);
@@ -104,7 +159,8 @@ section.visible {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: var(--space-12) var(--space-5) var(--space-10);
+    /* Slightly reduced horizontal padding; base vertical padding stays generous */
+    padding: var(--space-12) var(--space-3) var(--space-10);
 }
 
 .hero-title {
@@ -130,7 +186,7 @@ section.visible {
    ============================================ */
 
 .who-are-we {
-    padding: var(--space-11) 0;
+    padding-block: var(--space-11);
 }
 
 .who-are-we-grid {
@@ -151,9 +207,10 @@ section.visible {
 }
 
 .who-are-we-left {
-    padding: var(--space-9) var(--space-9);
+    padding: var(--space-9);
     position: relative;
-    min-height: 520px;
+    /* Avoid fixed min-height so content can adapt on smaller screens */
+    min-height: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -230,7 +287,7 @@ section.visible {
 }
 
 .who-are-we-right {
-    padding: var(--space-9) var(--space-9);
+    padding: var(--space-9);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -255,7 +312,8 @@ section.visible {
    ============================================ */
 
 .success-section {
-  padding: clamp(3rem, 10vw, 8rem) 1.5rem;
+  /* Use container padding for horizontals; only control vertical spacing here */
+  padding-block: clamp(3rem, 10vw, 8rem);
 }
 
 .success-title {
@@ -276,13 +334,13 @@ section.visible {
 
 /* success */
 .success-main {
-  font-size: clamp(8.5rem, 12vw, 70rem);
+  font-size: clamp(4.5rem, 11vw, 7rem);
   font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1;
   align-self: center;
-  margin-bottom: clamp(0.6rem, 2.5vw, 0.5rem);
-  margin-top: -50px;
+  margin-top: -0.75rem; /* Small optical tweak instead of large negative px */
+  margin-bottom: clamp(0.75rem, 2.5vw, 1.5rem);
 }
 
 /* looks like */
@@ -290,8 +348,8 @@ section.visible {
   font-size: clamp(2.25rem, 6vw, 4.25rem);
   font-weight: 400;
   align-self: center;
-  margin-top: -20px;
-  margin-bottom: 150px;
+  margin-top: -0.25rem;
+  margin-bottom: clamp(3rem, 10vw, 6rem);
 }
 
 /* ignore for now 
@@ -440,13 +498,13 @@ section.visible {
 
 .case-titles {
     text-align: center;
-    font-size: 60px;
+    font-size: clamp(2.5rem, 6vw, 3.75rem);
     font-weight: 700;
     font-style: italic;
 }
 
 .case-study {
-    padding: var(--space-11) 0;
+    padding-block: var(--space-11);
 }
 
 .case-study-grid {
@@ -464,7 +522,7 @@ section.visible {
 }
 
 .case-study-intro {
-    font-size: 29px;
+    font-size: 1.8125rem; /* 29px */
     margin-bottom: var(--space-2);
     line-height: 1.6;
     font-weight: var(--font-weight-normal);
@@ -488,7 +546,7 @@ section.visible {
 }
 
 .case-study-stats p {
-    font-size: 25px;
+    font-size: 1.5625rem; /* 25px */
     margin-bottom: var(--space-2);
     line-height: 1.65;
     font-weight: var(--font-weight-normal);
@@ -503,17 +561,17 @@ section.visible {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-6);
-    margin-top: var(--space-8);
-    padding-top: var(--space-8);
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
     border-top: var(--border-thin);
-    margin-top: 5px;
     align-items: start;
 }
 
 .kpi-item {
     text-align: center;
     padding: var(--space-4);
-    margin-top: -60px;
+    /* Remove large negative offset that caused overlap on small screens */
+    margin-top: 0;
 }
 
 .kpi-label {
@@ -526,7 +584,7 @@ section.visible {
 }
 
 .kpi-value {
-    font-size: clamp(40px, 5.5vw, 64px);
+    font-size: clamp(2.5rem, 5.5vw, 4rem);
     font-weight: var(--font-weight-bold);
     line-height: 1;
     letter-spacing: -0.02em;
@@ -543,15 +601,16 @@ section.visible {
     flex-direction: column;
     align-items: center;
     position: sticky;
-    top: 120px;
+    top: 7.5rem; /* 120px */
 }
 
 .phone-mockup {
-    width: 280px;
-    height: 580px;
+    /* Fluid phone size with aspect ratio instead of fixed width/height */
+    width: min(17.5rem, 70vw);
+    aspect-ratio: 9 / 19.5;
     background-color: #000;
-    border-radius: 38px;
-    padding: 11px;
+    border-radius: 2.375rem;
+    padding: 0.7rem;
     position: relative;
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.12);
     transition: transform var(--transition-base), box-shadow var(--transition-base);
@@ -566,7 +625,7 @@ section.visible {
     width: 100%;
     height: 100%;
     background-color: #fff;
-    border-radius: 30px;
+    border-radius: 1.875rem;
     overflow: hidden;
     position: relative;
 }
@@ -581,15 +640,16 @@ section.visible {
     position: relative;
 }
 
+/* Center title in phone content without hard-coded offsets */
 .phone-content h2 {
   width: 100%;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-weight: 600;
-
-  position:absolute;
-  top: 3rem;
-  left: 4.9rem;
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .watch-link {
@@ -625,8 +685,9 @@ section.visible {
    ============================================ */
 
 .platform-section {
-    padding: var(--space-11) 0;
-    margin-top: -150px;
+    padding-block: var(--space-11);
+    /* Removed large negative margin that caused overlap between sections */
+    margin-top: 0;
 }
 
 .platform-grid {
@@ -652,7 +713,7 @@ section.visible {
 }
 
 .platform-content p {
-    font-size: 25px;
+    font-size: 1.5625rem; /* 25px */
     line-height: 1.7;
     font-weight: var(--font-weight-normal);
     color: var(--color-text);
@@ -670,7 +731,7 @@ section.visible {
    ============================================ */
 
 .services-section {
-    padding: var(--space-11) 0;
+    padding-block: var(--space-11);
 }
 
 .services-grid {
@@ -712,7 +773,8 @@ section.visible {
     max-width: 660px;
     padding: var(--space-4) var(--space-4) var(--space-4) 0;
     text-align: left;
-    margin-bottom: -75px;
+    /* Let flex gap set spacing instead of aggressive negative margin */
+    margin-bottom: 0;
 }
 
 .service-name {
@@ -735,7 +797,7 @@ section.visible {
    ============================================ */
 
 .grow-section {
-    padding: var(--space-11) 0;
+    padding-block: var(--space-11);
 }
 
 .grow-grid {
@@ -796,7 +858,7 @@ section.visible {
 }
 
 .grow-intro {
-    font-size: 30px;
+    font-size: 1.875rem; /* 30px */
     margin-bottom: var(--space-4);
     line-height: 1.6;
     font-weight: var(--font-weight-normal);
@@ -804,14 +866,15 @@ section.visible {
 }
 
 .grow-title {
-    font-size: clamp(80px, 11vw, 136px);
+    font-size: clamp(4rem, 11vw, 8.5rem);
     font-weight: var(--font-weight-bold);
     line-height: 1.05;
     margin-bottom: var(--space-4);
     letter-spacing: -0.03em;
     display: block;
     text-align: left;
-    margin-top: -50px;
+    /* Remove aggressive negative margin for better mobile readability */
+    margin-top: 0;
 }
 
 /* ============================================
@@ -819,7 +882,7 @@ section.visible {
    ============================================ */
 
 .quadrants-section {
-    padding: var(--space-11) 0;
+    padding-block: var(--space-11);
 }
 
 .quadrants-grid {
@@ -831,7 +894,7 @@ section.visible {
 }
 
 .quadrant {
-    padding: var(--space-9) var(--space-9);
+    padding: var(--space-9);
     /* border-right: var(--border-thin);
     border-bottom: var(--border-thin); */
     display: flex;
@@ -893,7 +956,7 @@ section.visible {
    ============================================ */
 
 .knowledge-section {
-    padding: var(--space-11) 0;
+    padding-block: var(--space-11);
 }
 
 .knowledge-grid {
@@ -923,7 +986,7 @@ section.visible {
 }
 
 .knowledge-content p {
-    font-size: 25px;
+    font-size: 1.5625rem; /* 25px */
     line-height: 1.7;
     margin-bottom: var(--space-4);
     font-weight: var(--font-weight-normal);
@@ -1044,7 +1107,7 @@ section.visible {
    ============================================ */
 
 .precise-section {
-    padding: var(--space-11) 0;
+    padding-block: var(--space-11);
 }
 
 .precise-grid {
@@ -1106,7 +1169,7 @@ section.visible {
    ============================================ */
 
 .footer {
-    padding: var(--space-8) 0;
+    padding-block: var(--space-8);
     border-top: var(--border-thin);
     margin-top: var(--space-10);
 }
@@ -1129,7 +1192,8 @@ section.visible {
 
 @media (max-width: 1200px) {
     .container {
-        padding: 0 60px;
+        /* Keep using the fluid container padding; no extra fixed px here */
+        padding-inline: clamp(1.5rem, 4vw, 3.75rem);
     }
     
     .success-title-wrapper {
@@ -1172,11 +1236,7 @@ section.visible {
 
 @media (max-width: 1024px) {
     .container {
-        padding: 0 48px;
-    }
-    
-    section {
-        padding: var(--space-9) 0;
+        padding-inline: clamp(1.5rem, 5vw, 3rem);
     }
     
     .hero {
@@ -1257,11 +1317,7 @@ section.visible {
 
 @media (max-width: 768px) {
     .container {
-        padding: 0 32px;
-    }
-    
-    section {
-        padding: var(--space-8) 0;
+        padding-inline: clamp(1.25rem, 6vw, 2rem);
     }
     
     .hero {
@@ -1323,11 +1379,6 @@ section.visible {
     .knowledge-title,
     .services-title {
         font-size: clamp(36px, 6vw, 48px);
-    }
-    
-    .phone-mockup {
-        width: 240px;
-        height: 500px;
     }
     
     .hand-plant-icon {
