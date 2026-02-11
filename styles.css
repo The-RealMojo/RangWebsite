@@ -211,7 +211,6 @@ section.visible {
 .who-are-we-left {
     padding: var(--space-9);
     position: relative;
-    /* Avoid fixed min-height so content can adapt on smaller screens */
     min-height: 0;
     display: flex;
     flex-direction: column;
@@ -219,11 +218,11 @@ section.visible {
 }
 
 .who-are-we-title {
-    font-size: clamp(52px, 7.5vw, 84px);
+    font-size: clamp(52px, 7.5vw, 84px); 
     font-weight: var(--font-weight-bold);
     line-height: 0.92;
     letter-spacing: -0.02em;
-    text-align: left;
+    text-align: center;
 }
 
 .who-are-we-title span {
@@ -248,10 +247,10 @@ section.visible {
     justify-content: center;
     gap: var(--space-5);
     text-align: left;
-}
+} 
 
 .who-are-we-right p {
-    font-size: var(--text-lg);
+    font-size: var(--text-2xl);
     line-height: 1.7;
     font-weight: var(--font-weight-normal);
     color: var(--color-text);
@@ -261,6 +260,7 @@ section.visible {
     font-weight: var(--font-weight-semibold);
     color: var(--color-text);
 }
+
 
 @media (min-width: 1025px) {
     .who-are-we-grid {
@@ -291,6 +291,14 @@ section.visible {
     .illustrations {
         display: none;
     }
+}
+
+.who-are-we-title {
+    width: 100%;
+}
+
+.who-are-we-right p:first-of-type {
+    margin-bottom: var(--space--2); 
 }
 
 /* ============================================
@@ -461,6 +469,7 @@ section.visible {
     font-size: clamp(2.5rem, 6vw, 3.75rem);
     font-weight: 700;
     font-style: italic;
+    margin-bottom: -90px;
 }
 
 .case-study {
@@ -562,6 +571,17 @@ section.visible {
     align-items: center;
     position: sticky;
     top: 7.5rem; /* 120px */
+}
+
+@media (min-width: 1025px) {
+    .case-study-visual {
+        align-self: start;
+        margin-top: 3rem;
+    }
+    
+    .case-study-grid {
+        align-items: start;
+    }
 }
 
 .phone-mockup {
@@ -666,6 +686,17 @@ section.visible {
     }
 }
 
+@media (min-width: 1025px) {
+    .case-study-zhiyun .case-study-grid {
+        grid-template-columns: 1.25fr 1fr;
+    }
+    
+    .case-study-zhiyun .case-study-visual {
+        align-self: start;
+        margin-top: 0;
+    }
+}
+
 
 /* ============================================
    Platform Section
@@ -686,7 +717,7 @@ section.visible {
 }
 
 .platform-title {
-    font-size: clamp(44px, 6.5vw, 64px);
+    font-size: clamp(34px, 6.5vw, 54px);
     font-weight: var(--font-weight-bold);
     margin-bottom: var(--space-6);
     line-height: 1.15;
@@ -1110,6 +1141,18 @@ section.visible {
     border-radius: 50%;
 }
 
+@media (max-width: 768px) {
+    .knowledge-content p {
+        max-width: 100%;
+        line-height: 1.8;
+        margin-bottom: var(--space-3);
+    }
+    
+    .knowledge-section .container {
+        padding-inline: clamp(1.5rem, 6vw, 2.5rem);
+    }
+}
+
 /* ============================================
    Precise Section
    ============================================ */
@@ -1392,5 +1435,50 @@ section.visible {
     .hand-plant-icon {
         width: 200px;
         height: 240px;
+    }
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.footer-label {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--color-text-light);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 0;
+}
+
+.footer-email {
+    font-size: var(--text-base);
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition-fast);
+}
+
+.footer-email:hover {
+    border-bottom-color: var(--color-border);
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-5);
+    }
+    
+    .footer-contact {
+        width: 100%;
     }
 }
