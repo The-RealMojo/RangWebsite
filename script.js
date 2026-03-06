@@ -1,28 +1,37 @@
-// Smooth scroll animations for refined design
-const observerOptions = {
-    threshold: 0.12,
-    rootMargin: '0px 0px -80px 0px'
+const sections = document.querySelectorAll('.section-panel[id]');
+const reelStops = document.querySelectorAll('.reel-stop');
+
+const setActiveStop = (id) => {
+  reelStops.forEach((stop) => {
+    stop.classList.toggle('active', stop.dataset.target === id);
+  });
 };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-        }
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        history.replaceState(null, '', `#${id}`);
+        setActiveStop(id);
+      }
     });
-}, observerOptions);
+  },
+  {
+    rootMargin: '-35% 0px -45% 0px',
+    threshold: 0.15
+  }
+);
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll('section');
-    
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-    
-    // Show hero immediately
-    if (sections.length > 0) {
-        sections[0].classList.add('visible');
-    }
+sections.forEach((section) => observer.observe(section));
+
+reelStops.forEach((stop) => {
+  stop.addEventListener('click', () => {
+    setActiveStop(stop.dataset.target);
+  });
 });
+
+if (window.location.hash) {
+  const initial = window.location.hash.slice(1);
+  setActiveStop(initial);
+}
